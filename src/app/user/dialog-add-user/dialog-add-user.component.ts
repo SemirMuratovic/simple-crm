@@ -11,11 +11,15 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-dialog-add-user',
   standalone: true,
+  providers: [provideNativeDateAdapter()],
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -25,6 +29,8 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    MatIconModule,
+    MatDatepickerModule,
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
