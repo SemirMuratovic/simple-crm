@@ -2,8 +2,6 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
-  MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -16,15 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { User } from '../../../models/user.class';
-import {
-  Firestore,
-  collection,
-  collectionData,
-  doc,
-  setDoc,
-  addDoc,
-} from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 
@@ -55,12 +45,7 @@ export class DialogAddUserComponent {
   birthDate!: Date;
   loading = false;
 
-  items$;
-
-  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {
-    const itemCollection = collection(this.firestore, 'users');
-    this.items$ = collectionData(itemCollection);
-  }
+  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {}
 
   save() {
     this.user.birthDate = this.birthDate.getTime();

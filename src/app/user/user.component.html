@@ -14,18 +14,13 @@
     <table>
       <tr>
         <th>Name</th>
-        <th>Email</th>
+        <th>Zip Code</th>
         <th>City</th>
       </tr>
-      <tr>
-        <td>dfsdf</td>
-        <td>dfsdf</td>
-        <td>dfsdf</td>
-      </tr>
-      <tr>
-        <td>dfsdf</td>
-        <td>dfsdf</td>
-        <td>dfsdf</td>
+      <tr *ngFor="let user of allUserData">
+        <td>{{ user.firstName }} {{ user.lastName }}</td>
+        <td>{{ user.zipCode }}</td>
+        <td>{{ user.city }}</td>
       </tr>
     </table>
   </mat-card-content>
