@@ -25,6 +25,8 @@ import {
   addDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -41,6 +43,8 @@ import { Observable } from 'rxjs';
     MatDialogClose,
     MatIconModule,
     MatDatepickerModule,
+    MatProgressBarModule,
+    CommonModule,
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
@@ -49,10 +53,11 @@ export class DialogAddUserComponent {
   firestore: Firestore = inject(Firestore);
   user = new User();
   birthDate!: Date;
+  loading = false;
 
   items$;
 
-  constructor() {
+  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {
     const itemCollection = collection(this.firestore, 'users');
     this.items$ = collectionData(itemCollection);
   }
@@ -61,12 +66,15 @@ export class DialogAddUserComponent {
     this.user.birthDate = this.birthDate.getTime();
     console.log(this.user);
     const ref = collection(this.firestore, 'users');
+    this.loading = true;
     addDoc(ref, this.user.toJson())
       .catch((err) => {
         console.error('Failed to set new doc!', err);
       })
       .then((result) => {
+        this.loading = false;
         console.log('Adding user finished', result);
+        this.dialogRef.close();
       });
   }
 }
