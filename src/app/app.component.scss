@@ -15,10 +15,15 @@
 .logo-container {
   padding-left: 1rem;
   padding-right: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   min-height: 3.5rem;
   display: flex;
   align-items: center;
+
+  .logo {
+    width: fit-content;
+    height: 3rem;
+  }
 }
 
 mat-toolbar,
