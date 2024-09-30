@@ -40,12 +40,7 @@ export class UserComponent {
   allUserData: any[] = [];
 
   constructor() {
-    this.unsub = this.readUserData();
-  }
-
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
+    this.unsub = this.readAllUserData();
   }
 
   ngOnDestroy(): void {
@@ -56,7 +51,7 @@ export class UserComponent {
     this.dialog.open(DialogAddUserComponent);
   }
 
-  readUserData() {
+  readAllUserData() {
     return onSnapshot(collection(this.firestore, 'users'), (list) => {
       this.allUserData = [];
       list.forEach((element) => {
