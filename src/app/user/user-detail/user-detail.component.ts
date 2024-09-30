@@ -5,23 +5,37 @@ import {
   getDoc,
   onSnapshot,
   doc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { User } from '../../../models/user.class';
+import { MatButtonModule } from '@angular/material/button';
+import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { DialogDeleteUserComponent } from '../dialog-delete-user/dialog-delete-user.component';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [MatCardModule, MatIconModule],
+  imports: [
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    RouterLink,
+  ],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent {
+  readonly dialog = inject(MatDialog);
   public userId: any = '';
   firestore: Firestore = inject(Firestore);
   unsub;
-  userData: any = {};
+  userData: User = new User();
 
   constructor(private route: ActivatedRoute) {
     this.unsub = this.readUserdata();
@@ -34,11 +48,19 @@ export class UserDetailComponent {
   readUserdata() {
     this.userId = this.route.snapshot.paramMap.get('id');
     return onSnapshot(this.singleUserRef('users', this.userId), (element) => {
-      console.log(element.data());
+      this.userData = new User(element.data());
     });
   }
 
   singleUserRef(colId: string, docId: string) {
     return doc(collection(this.firestore, colId), docId);
+  }
+
+  openDeleteUserDialog() {
+    this.dialog.open(DialogDeleteUserComponent);
+  }
+
+  openAddressDialog() {
+    // this.dialog.open(DialogAddUserComponent);
   }
 }
