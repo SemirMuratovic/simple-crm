@@ -38,12 +38,7 @@ export class UserComponent {
   allUserData: any[] = [];
 
   constructor() {
-    this.unsub = onSnapshot(collection(this.firestore, 'users'), (list) => {
-      this.allUserData = [];
-      list.forEach((element) => {
-        this.allUserData.push(this.setUserObject(element.data()));
-      });
-    });
+    this.unsub = this.readUserData();
   }
 
   ngOnInit(): void {
@@ -59,10 +54,20 @@ export class UserComponent {
     this.dialog.open(DialogAddUserComponent);
   }
 
+  readUserData() {
+    return onSnapshot(collection(this.firestore, 'users'), (list) => {
+      this.allUserData = [];
+      list.forEach((element) => {
+        this.allUserData.push(this.setUserObject(element.data()));
+      });
+    });
+  }
+
   setUserObject(obj: any) {
     return {
       firstName: obj.firstName || '',
       lastName: obj.lastName || '',
+      eMail: obj.eMail || '',
       birthDate: obj.birthDate || '',
       street: obj.street || '',
       zipCode: obj.zipCode || '',
