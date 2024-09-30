@@ -88,4 +88,8 @@ export class DialogAddUserComponent {
         this.dialogRef.close();
       });
   }
+
+  onNoClick() {
+    this.dialogRef.close();
+  }
 }
