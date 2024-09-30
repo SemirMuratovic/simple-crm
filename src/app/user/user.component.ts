@@ -16,6 +16,7 @@ import {
   collectionData,
 } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -27,6 +28,7 @@ import { CommonModule } from '@angular/common';
     MatDialogModule,
     MatCardModule,
     CommonModule,
+    RouterModule,
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
@@ -58,13 +60,14 @@ export class UserComponent {
     return onSnapshot(collection(this.firestore, 'users'), (list) => {
       this.allUserData = [];
       list.forEach((element) => {
-        this.allUserData.push(this.setUserObject(element.data()));
+        this.allUserData.push(this.setUserObject(element.data(), element.id));
       });
     });
   }
 
-  setUserObject(obj: any) {
+  setUserObject(obj: any, id: string) {
     return {
+      id: id,
       firstName: obj.firstName || '',
       lastName: obj.lastName || '',
       eMail: obj.eMail || '',
