@@ -82,9 +82,8 @@ export class DialogAddUserComponent {
       .catch((err) => {
         console.error('Failed to set new doc!', err);
       })
-      .then((result) => {
+      .then(() => {
         this.loading = false;
-        console.log('Adding user finished', result);
         this.dialogRef.close();
       });
   }

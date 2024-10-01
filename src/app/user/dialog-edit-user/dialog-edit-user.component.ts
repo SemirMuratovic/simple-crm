@@ -88,8 +88,15 @@ export class DialogEditUserComponent {
 
   save() {
     this.user.birthDate = this.birthDate.getTime();
-    updateDoc(this.singleUserRef('users', this.userId), this.user.toJson());
-    this.dialogRef.close();
+    this.loading = true;
+    updateDoc(this.singleUserRef('users', this.userId), this.user.toJson())
+      .catch((err) => {
+        console.error('Failed to set new doc!', err);
+      })
+      .then(() => {
+        this.loading = false;
+        this.dialogRef.close();
+      });
   }
 
   singleUserRef(colId: string, docId: string) {
