@@ -1,0 +1,105 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<h2 mat-dialog-title>Edit User</h2>
+<mat-dialog-content>
+  <form class="form">
+    <div class="name-container">
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>First name</mat-label>
+        <input
+          [disabled]="loading"
+          [(ngModel)]="user.firstName"
+          name="firstName"
+          matInput
+          placeholder="Max"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input
+          [disabled]="loading"
+          [(ngModel)]="user.lastName"
+          name="lastName"
+          matInput
+          placeholder="Musterman"
+        />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          [formControl]="email"
+          (blur)="updateErrorMessage()"
+          [(ngModel)]="user.eMail"
+          name="eMail"
+          required
+        />
+        @if (email.invalid) {
+        <mat-error>{{ errorMessage() }}</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Choose a date</mat-label>
+        <input
+          [disabled]="loading"
+          matInput
+          [(ngModel)]="birthDate"
+          name="birthDate"
+          [matDatepicker]="picker"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Street, House No.</mat-label>
+        <input
+          [disabled]="loading"
+          matInput
+          [(ngModel)]="user.street"
+          name="street"
+        />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="mr-16">
+        <mat-label>Zip</mat-label>
+        <input
+          [disabled]="loading"
+          [(ngModel)]="user.zipCode"
+          name="zipCode"
+          matInput
+          placeholder="12345"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>City</mat-label>
+        <input
+          [disabled]="loading"
+          [(ngModel)]="user.city"
+          name="city"
+          matInput
+          placeholder="Musterstadt"
+        />
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button [disabled]="loading" (click)="onNoClick()" mat-button="">
+    Cancel
+  </button>
+  <button [disabled]="loading" mat-button cdkFocusInitial (click)="save()">
+    Save
+  </button>
+</mat-dialog-actions>

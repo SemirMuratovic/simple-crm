@@ -48,7 +48,6 @@ export class DialogDeleteUserComponent {
   }
 
   deleteUser() {
-    this.userId = this.route.snapshot.firstChild?.params['id'];
     deleteDoc(this.singleUserRef('users', this.userId));
     this.dialogRef.close();
   }

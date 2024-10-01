@@ -1,14 +1,11 @@
 <mat-card class="profile-background" appearance="outlined">
-  <button
-    mat-icon-button
-    class="edit-user-btn"
-    (click)="openAddressDialog()"
-    [matMenuTriggerFor]="menu"
-  >
+  <button mat-icon-button class="edit-user-btn" [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item><mat-icon>edit</mat-icon>Edit</button>
+    <button mat-menu-item (click)="openEditUserDialog()">
+      <mat-icon>edit</mat-icon>Edit
+    </button>
     <button mat-menu-item (click)="openDeleteUserDialog()">
       <mat-icon>delete</mat-icon>Delete
     </button>

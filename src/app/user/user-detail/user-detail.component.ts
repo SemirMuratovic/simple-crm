@@ -16,6 +16,7 @@ import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.compo
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { DialogDeleteUserComponent } from '../dialog-delete-user/dialog-delete-user.component';
+import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -57,10 +58,13 @@ export class UserDetailComponent {
   }
 
   openDeleteUserDialog() {
-    this.dialog.open(DialogDeleteUserComponent);
+    const deleteUserDialog = this.dialog.open(DialogDeleteUserComponent);
+    deleteUserDialog.componentInstance.userId = this.userId;
   }
 
-  openAddressDialog() {
-    // this.dialog.open(DialogAddUserComponent);
+  openEditUserDialog() {
+    const editUserDiealog = this.dialog.open(DialogEditUserComponent);
+    editUserDiealog.componentInstance.user = new User(this.userData.toJson());
+    editUserDiealog.componentInstance.userId = this.userId;
   }
 }
