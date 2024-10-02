@@ -6,15 +6,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
 import { MatCardModule } from '@angular/material/card';
-import {
-  Firestore,
-  collection,
-  addDoc,
-  onSnapshot,
-  doc,
-  getDocs,
-  collectionData,
-} from '@angular/fire/firestore';
+import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 

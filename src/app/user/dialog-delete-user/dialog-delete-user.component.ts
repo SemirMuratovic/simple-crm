@@ -8,15 +8,8 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import {
-  collection,
-  Firestore,
-  getDoc,
-  onSnapshot,
-  doc,
-  deleteDoc,
-} from '@angular/fire/firestore';
+import { RouterLink } from '@angular/router';
+import { collection, Firestore, doc, deleteDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dialog-delete-user',
@@ -38,10 +31,7 @@ export class DialogDeleteUserComponent {
   firestore: Firestore = inject(Firestore);
   public userId: any = '';
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogDeleteUserComponent>,
-    private route: ActivatedRoute
-  ) {}
+  constructor(public dialogRef: MatDialogRef<DialogDeleteUserComponent>) {}
 
   onNoClick() {
     this.dialogRef.close();
